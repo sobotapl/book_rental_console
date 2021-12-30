@@ -1,2 +1,15 @@
-Java,Nowak Pawel,1999,true
-Bitcoin,Phil Konieczny,1987,true
+Java,Nowak Pawel,1999,false
+Bitcoin,Phil Konieczny,1987,false
+Nowy poarzadek swiata,John Doe,1999,true
+JavaScript,Koza,1999,false
+Krypt,Nowak,1999,true
+Ala,Brzechwa,2010,false
+Ola,Nowak,2020,true
+Mecz,Nowak,2015,false
+Silownia,Janek,1987,2010
+Alab,Brzechwa,2012,false
+Alac,Brzechwa Jan,2010,true
+Alad,Brzechwa,2010,false
+Alag,Brzechwa Stan,2010,false
+Alae,Brzechwa Abraham,2010,true
+

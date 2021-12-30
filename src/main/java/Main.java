@@ -23,17 +23,19 @@ public class Main {
         int choice;
         do {
             System.out.println("------------------------------");
-            System.out.println("1 - dodawanie ksiazki");
+            System.out.println("1 - dodawanie ksiazki do bazy");
             System.out.println("2 - pokaz liste ksiazek");
-            System.out.println("3 - oddawanie ksiazki");
-            System.out.println("4 - wyswietl wolne pozycje");
-            System.out.println("5 - zakoncz");
+            System.out.println("3 - pokaz wolne pozycje");
+            System.out.println("4 - pokaz zajete pozycje");
+            System.out.println("5 - wypozyczenie ksiazki");
+            System.out.println("6 - oddanie ksiazki");
+            System.out.println("7 - zakoncz");
             System.out.println("------------------------------");
             System.out.println("Wprowadz numer: ");
             choice = scanner.nextInt();
             parseChoice(choice);
 
-        }while(choice != 5);
+        }while(choice != 7);
     }
 
     public static void parseChoice(int choice) {
@@ -47,14 +49,22 @@ public class Main {
                 break;
             }
             case 3: {
-                //rentBook();
-                break;
-            }
-            case 4: {
                 showAvailableBooks();
                 break;
             }
+            case 4: {
+                showNotAvailableBooks();
+                break;
+            }
             case 5: {
+                rentBook();
+                break;
+            }
+            case 6: {
+                returnBook();
+                break;
+            }
+            case 7: {
                 BookHelper.saveBookToFile(path, bookList);
                 System.out.println(ConsoleColors.RED + "KONIEC!" + ConsoleColors.RESET);
                 break;
@@ -63,6 +73,49 @@ public class Main {
                 System.out.println("Niepoprawna komenda");
             }
         }
+    }
+
+    private static void showNotAvailableBooks() {
+        int amountofNotAvailableBooks = 0;
+        for (Book book : bookList) {
+            if(!book.isAvailability()){
+                amountofNotAvailableBooks++;
+            }
+        }
+        System.out.println("Liczba wypozyczonych ksiazek w bazie: " + amountofNotAvailableBooks);
+        int counter = 0;
+        for (Book book : bookList) {
+            if(!book.isAvailability()){
+                if(counter < 9){
+                    System.out.print("0");
+                }
+                System.out.println(++counter + "| " + ConsoleColors.GREEN + book + ConsoleColors.RESET);
+            }
+        }
+    }
+
+    private static void returnBook() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Podaj tytul ksiazki ktora chcesz zwrocic: ");
+        String title = scanner.nextLine();
+        for (Book book : bookList) {
+            if(book.getTitle().equalsIgnoreCase(title) && !book.isAvailability()) {
+                book.setAvailability(true);
+            }
+        }
+        System.out.println(ConsoleColors.BLUE + "Ksiazka zostala zwrocona: " + ConsoleColors.RESET);
+    }
+
+    private static void rentBook() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Podaj tytul ksiazki z listy ktora chcesz wypozyczyc: ");
+        String title = scanner.nextLine();
+        for (Book book : bookList) {
+            if(book.getTitle().equalsIgnoreCase(title) && book.isAvailability()) {
+               book.setAvailability(false);
+            }
+        }
+        System.out.println(ConsoleColors.BLUE + "Mozesz zabrac ksiazke" + ConsoleColors.RESET);
     }
 
     private static void showAvailableBooks() {
@@ -82,7 +135,6 @@ public class Main {
                 System.out.println(++counter + "| " + ConsoleColors.GREEN + book + ConsoleColors.RESET);
             }
         }
-
     }
 
     private static void showBooks() {

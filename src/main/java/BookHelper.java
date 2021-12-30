@@ -31,7 +31,7 @@ public class BookHelper {
             elements[0] = book.getTitle()+",";
             elements[1] = book.getAuthor()+",";
             elements[2] = String.valueOf(book.getYear())+",";
-            elements[3] = String.valueOf(book.isAvailability())+"";
+            elements[3] = String.valueOf(book.isAvailability());
             for (String element : elements) {
                 sb.append(element);
             }
