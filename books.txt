@@ -1,0 +1,2 @@
+Java,Nowak Pawel,1999,true
+Bitcoin,Phil Konieczny,1987,true
